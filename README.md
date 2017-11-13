@@ -1,2 +1,2 @@
 ##Shopping list
-By Kailtin Stark
+By Kailtin Stark and Candace Graus
