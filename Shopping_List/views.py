@@ -5,8 +5,8 @@ def index(request):
     text="<h1> Welcome to my app</h1>"
     return HttpResponse(text)
 
-def Grocery_List(request):
-    return HttpResponse("Here are a list of items: ")
+def saved_grocery_lists(request):
+    return render(request,'Shopping_List/saved_grocery_lists.html')
 
 def recipelist():
     context = {
@@ -30,7 +30,7 @@ def addrecipe(request, recipe_id=None):
             errors.append('Enter Ingredient Amount')
         if not request.POST.get('ingredient_meas', ''):
             errors.append('Enter Ingredient Measure')
-        if not request.POST.get('ingredient_name, ''):
+        if not request.POST.get('ingredient_name', ''):
             errors.append('Enter Ingredient Name')
 
         if recipe_id:
