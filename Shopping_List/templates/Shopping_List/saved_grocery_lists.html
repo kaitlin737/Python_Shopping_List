@@ -1,18 +1,13 @@
-{% load staticfiles %}
-<html>
-  <head>
-    <title> Shopping List</title>
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="{% static 'css/Shopping_List.css' %}">
+{% extends 'Shopping_List/base.html' %}
 
-  </head>
-  <body>
-    <div class="page-header">
-      <h1><a href="{% url 'grocery_detail' pk=saved_grocery_lists.pk %}">{{ saved_grocery_lists.title }}</a></h1>
-      <h1> Home Page </h1>
-    </div>
-
-
-  </body>
-</html>
+{% block content %}
+    {% for Grocery_list in saved_lists%}
+        <div class="post">
+            <div class="date">
+                {{ Grocery_list.created_date }}
+            </div>
+            <h1><a href="{% url 'grocerylist_detail' pk=Grocery_list.pk %}">{{ Grocery_list.title }}</a></h1>
+            <p>{{ Grocery_list.text|linebreaksbr }}</p>
+        </div>
+    {% endfor %}
+{% endblock %}

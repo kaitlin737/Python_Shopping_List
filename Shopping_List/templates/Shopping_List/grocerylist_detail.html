@@ -1,9 +1,13 @@
 {% extends 'Shopping_List/base.html' %}
 
 {% block content %}
-    <div class="post">
-      <a class="btn btn-default" href="{% url 'grocerylist_edit' pk=Grocery_list.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+    <div >
+        {% if Grocery_list.created_date %}
+            <div>
+                {{ Grocery_list.created_date }}
+            </div>
+        {% endif %}
         <h1>{{ Grocery_list.title }}</h1>
         <p>{{ Grocery_list.text|linebreaksbr }}</p>
     </div>
-{% endblock %}
+{% endblock %}}

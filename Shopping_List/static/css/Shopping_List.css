@@ -1,11 +1,11 @@
 .page-header {
-    background-color: #ff9400;
+    background-color: #6666ff;
     margin-top: 0;
     padding: 20px 20px 20px 40px;
 }
 
-.page-header h1{
-    color: #ffffff;
+ title{
+    color: #00001a;
     font-size: 36pt;
     text-decoration: none;
 }
