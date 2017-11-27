@@ -25,13 +25,13 @@ def grocerylist_edit(request,pk):
     Grocery_list = get_object_or_404(Grocery_list, pk=pk)
     if request.method == "POST":
         form = GroceryForm(request.POST, instance=Grocery_list)
-        if form.is_valid():
-            Grocery_list = form.save(commit=False)
-            Grocery_list.created_date = timezone.now()
-            Grocery_list.save()
-            return redirect('grocerylist_detail', pk=Grocery_list.pk)
+        #if form.is_valid():
+        Grocery_list = form.save(commit=False)
+        Grocery_list.created_date = timezone.now()
+        Grocery_list.save()
+        return redirect('grocerylist_detail', pk=Grocery_list.pk)
     else:
-        form = GroceryForm(instance=Grocery_list)
+        form = GroceryForm(instance=post)
     return render(request, 'Shopping_List/grocerylist_edit.html', {'form': form})
 
 def saved_grocery_lists(request):
