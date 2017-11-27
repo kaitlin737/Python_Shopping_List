@@ -3,7 +3,7 @@ from django.utils import timezone
 
 # Create your models here.
 class Grocery_list(models.Model):
-    title = models.CharField(max_length=140, default='DEFAULT VALUE')
+    title = models.CharField(max_length=140)
     text=models.TextField()
     created_date=models.DateTimeField(default=timezone.now)
 def publish(self):
