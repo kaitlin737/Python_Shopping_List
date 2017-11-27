@@ -1,13 +1,20 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .models import Grocery_list
+from django.shortcuts import render, get_object_or_404
+from django.utils import timezone
 # Create your views here.
 def index(request):
     text="<h1> Welcome to my app</h1>"
     return HttpResponse(text)
-
+def grocerylist_new(request):
+    form=GroceryForm()
+    return render(request,'Shopping_List/grocerylist_edit.html',{'form':form})
 def saved_grocery_lists(request):
     return render(request,'Shopping_List/saved_grocery_lists.html')
 
+def grocery_detail(request,pk):
+    return render(request, 'blog/post_detail.html')
 def recipelist():
     context = {
         'heading': 'List of Recipes',
