@@ -5,10 +5,11 @@ from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 from .forms import GroceryForm
 from django.shortcuts import redirect
+
 # Create your views here.
-def index(request):
-    text="<h1> Welcome to my app</h1>"
-    return HttpResponse(text)
+def Home(request):
+    return render(request, 'Shopping_List/Home.html')
+
 def grocery_new(request):
     if request.method == "POST":
         form=GroceryForm(request.POST)
@@ -21,26 +22,36 @@ def grocery_new(request):
         form=GroceryForm()
     return render(request,'Shopping_List/grocerylist_edit.html',{'form':form})
 
-def grocerylist_edit(request,pk):
-    Grocery_list = get_object_or_404(Grocery_list, pk=pk)
-    if request.method == "POST":
-        form = GroceryForm(request.POST, instance=Grocery_list)
-        #if form.is_valid():
-        Grocery_list = form.save(commit=False)
-        Grocery_list.created_date = timezone.now()
-        Grocery_list.save()
-        return redirect('grocerylist_detail', pk=Grocery_list.pk)
-    else:
-        form = GroceryForm(instance=post)
-    return render(request, 'Shopping_List/grocerylist_edit.html', {'form': form})
+
 
 def saved_grocery_lists(request):
     saved_lists = Grocery_list.objects.filter(created_date__lte=timezone.now()).order_by('created_date')
     return render(request, 'Shopping_List/saved_grocery_lists.html', {'saved_lists':saved_lists})
 
+def grocerylist_edit(request,pk):
+    #title = get_object_or_404(Grocery_list, pk=pk)
+    #text = get_object_or_404(Grocery_list, pk=pk)
+    Grocery_list = get_object_or_404(Grocery_list, pk=pk)
+    #post=Grocery_list.objects.get(pk=pk)
+    if request.method == "POST":
+        form = GroceryForm(request.POST, instance=Grocery_list)
+        if form.is_valid():
+            Grocery_list = form.save(commit=False)
+            Grocery_list.created_date = timezone.now()
+            Grocery_list.save()
+            return redirect('grocerylist_detail', pk=Grocery_list.pk)
+    else:
+        form = GroceryForm(instance=post)
+    return render(request, 'Shopping_List/grocerylist_edit.html', {'form': form})
+
 def grocerylist_detail(request,pk):
-    saved_lists=get_object_or_404(Grocery_list,pk=pk)
-    return render(request, 'Shopping_List/grocerylist_detail.html',{'saved_lists':saved_lists})
+    #title = get_object_or_404(Grocery_list, pk=pk)
+    #text = get_object_or_404(Grocery_list, pk=pk)
+    #Grocery_list.title=Grocery_list.objects.get(pk=pk)
+
+    Grocery_list=get_object_or_404(Grocery_list,pk=pk)
+    return render(request, 'Shopping_List/grocerylist_detail.html',{'Grocery_list':Grocery_list})
+
 def recipelist():
     context = {
         'heading': 'List of Recipes',
