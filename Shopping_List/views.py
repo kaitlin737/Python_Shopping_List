@@ -4,6 +4,7 @@ from .models import Grocery_list
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 from .forms import GroceryForm
+from django import forms
 from django.shortcuts import redirect
 
 # Create your views here.
@@ -31,26 +32,31 @@ def saved_grocery_lists(request):
 def grocerylist_edit(request,pk):
     #title = get_object_or_404(Grocery_list, pk=pk)
     #text = get_object_or_404(Grocery_list, pk=pk)
-    Grocery_list = get_object_or_404(Grocery_list, pk=pk)
+    grocerylist = get_object_or_404(Grocery_list, pk=pk)
     #post=Grocery_list.objects.get(pk=pk)
     if request.method == "POST":
-        form = GroceryForm(request.POST, instance=Grocery_list)
+        form = GroceryForm(request.POST, instance=grocerylist)
         if form.is_valid():
-            Grocery_list = form.save(commit=False)
-            Grocery_list.created_date = timezone.now()
-            Grocery_list.save()
-            return redirect('grocerylist_detail', pk=Grocery_list.pk)
+            grocerylist = form.save(commit=False)
+            grocerylist.created_date = timezone.now()
+            grocerylist.save()
+            return redirect('grocerylist_detail', pk=grocerylist.pk)
     else:
-        form = GroceryForm(instance=post)
+        form = GroceryForm(instance=grocerylist)
     return render(request, 'Shopping_List/grocerylist_edit.html', {'form': form})
 
-def grocerylist_detail(request,pk):
-    #title = get_object_or_404(Grocery_list, pk=pk)
-    #text = get_object_or_404(Grocery_list, pk=pk)
-    #Grocery_list.title=Grocery_list.objects.get(pk=pk)
-
-    Grocery_list=get_object_or_404(Grocery_list,pk=pk)
-    return render(request, 'Shopping_List/grocerylist_detail.html',{'Grocery_list':Grocery_list})
+class GroceryListForm(forms.ModelForm):
+    class Meta:
+        model = Grocery_list
+        fields = ("title","text" )
+def bound_form(request, pk):
+    grocerylist = get_object_or_404(Grocery_list, pk=pk)
+    #form = GroceryListForm(instance=grocerylist)
+    return render(request,'Shopping_List/grocerylist_detail.html', {'grocerylist': grocerylist})
+#def bound_form(request, pk):
+#    grocerylist = get_object_or_404(Grocery_list, pk=pk)
+#    form = GroceryListForm(instance=grocerylist)
+#    return render(request,'Shopping_List/grocerylist_detail.html', {'form': form})
 
 def recipelist():
     context = {
