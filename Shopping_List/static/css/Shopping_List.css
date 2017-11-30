@@ -1,22 +1,27 @@
-/*--.page-header {
-    background-color: #6666ff;
-    margin-top: 0;
-    padding: 20px 20px 20px 40px;
-}*/
-
-h1 a{
-    color: #00001a;
-    font-size: 36pt;
-    text-decoration: none;
-}
-
-
-h1 {
-    color: #00001a;
-    font-size: 36pt;
-    text-decoration: none;
+.jumbotron{
+margin-top: 20px;
+margin-left: 150px;
+padding: 0px;
+width:80%;
+text-align: center
 }
 .thumbnail img {
    height:250px;
    width:100%;
 }
+
+.jumbotron-custom{
+    background:url("http://www.foodwastealliance.org/wp-content/uploads/2013/05/iStock_000014489544Medium.jpg") center center;/*slide.jpg =>you image*/
+    margin-top: -20px;/*removes white space at top*/
+    background-size: cover;
+    text-align: center;
+    min-height:100%;
+    min-height: 100vh; /* fills full page     */
+    display: flex;
+    align-items: center;
+    display:block;
+}
+input {
+   width: 375px;
+   height: 225px;
+ }
