@@ -76,7 +76,7 @@ def recipelist():
         'heading': 'List of Recipes',
         'title': 'Recipe List',
         'recipe': recipe
-    }"""
+    }
 
 def recipe_add (request, recipe_id=None):
     errors = []
