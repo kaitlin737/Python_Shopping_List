@@ -1,34 +1,11 @@
-/*--.page-header {
-    background-color: #6666ff;
-    margin-top: 0;
-    padding: 20px 20px 20px 40px;
-}*/
-
-h1 a{
-    color: #00001a;
-    font-size: 36pt;
-    text-decoration: none;
-}
-
-h1 {
-    color: #00001a;
-    font-size: 36pt;
-    text-decoration: none;
+.jumbotron{
+margin-top: 20px;
+margin-left: 150px;
+padding: 0px;
+width:80%;
+text-align: center
 }
 .thumbnail img {
    height:250px;
    width:100%;
 }
-button{
-    position:absolute;
-    bottom: 5%;
-    right:20%;
-}
-
-.bordered {
-  box-sizing: content-box;
-  width: 100%;
-  border: solid #5B6DCD 10px;
-  padding: 5px;
-  margin-top: 10px;
-  }
