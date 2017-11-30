@@ -1,19 +1,22 @@
 {% extends 'Shopping_List/base.html' %}
 
 {% block content %}
-
-
-<form action="/your-name/" method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-</form>
-  <div>
-        {% if grocerylist.created_date %}
-            <div>
-                {{ grocerylist.created_date }}
-            </div>
-        {% endif %}
-        <h1>{{ grocerylist.title }}</h1>
-        <p>{{ grocerylist.text|linebreaksbr }}</p>
+    {% for Recipe in saved_krecipe_list%}
+    <div>
+      <p>"Hello recipe list"</p>
     </div>
-{% endblock %}}
+    {% endfor %}
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Shopping List</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li ><a href="http://127.0.0.1:8000/">Home</a></li>
+      <li><a href="http://127.0.0.1:8000/Shopping_List/saved_recipe_list/">Recipes</a></li>
+      <li><a href="#">Menu</a></li>
+      <li class="active"><a href="http://127.0.0.1:8000/Shopping_List/saved_lists/">Grocery List</a></li>
+    </ul>
+  </div>
+</nav>
+{% endblock %}

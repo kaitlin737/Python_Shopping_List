@@ -46,7 +46,7 @@ MEASURES = (
 
 class Recipe(models.Model):
     recipe_name = models.CharField(max_length = 50)
-    ingredient_amt = models.FloatField(max_length = 5,choices = AMOUNTS)
-    ingredient_meas = models.CharField(max_length = 5, choices = MEASURES)
-    ingredient_name = models.TextField(max_length = 50)
+    ingredient_amt = models.FloatField(max_length = 5, default = 0, choices = AMOUNTS)
+    ingredient_meas = models.CharField(max_length = 5, default = "", choices = MEASURES)
+    ingredient_name = models.TextField(max_length = 50, default = "")
     notes = models.TextField()

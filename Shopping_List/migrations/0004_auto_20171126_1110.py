@@ -15,6 +15,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='ingredients',
             name='ingredient_meas',
-            field=models.CharField(choices=[('t', 'Teaspoon'), ('T', 'Tablespoon'), ('cup', 'Cup'), ('piece', 'Piece(s)'), ('', 'None')], max_length=5),
+            field=models.CharField(choices=[('t', 'Teaspoon'), ('T', 'Tablespoon'), ('cup', 'Cup'), ('piece', 'Piece(s)')], max_length=5),
         ),
     ]

@@ -21,17 +21,17 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='recipe',
             name='ingredient_amt',
-            field=models.FloatField(choices=[('.125', '1/8'), ('.25', '1/4'), ('.5', '1/2'), ('.75', '3/4'), ('1.00', '1'), ('1.25', '1 1/4'), ('1.50', '1 1/2'), ('1.75', '1 3/4'), ('2', '2'), ('2.25', '2 1/4'), ('2.50', '2 1/2'), ('2.75', '2 3/4'), ('3.00', '3'), ('4.00', '4'), ('5.00', '5'), ('6.00', '6'), ('7.00', '7'), ('8.00', '8'), ('9.00', '9'), ('10.00', '10')], default='None', max_length=5),
+            field=models.FloatField(choices=[('.125', '1/8'), ('.25', '1/4'), ('.5', '1/2'), ('.75', '3/4'), ('1.00', '1'), ('1.25', '1 1/4'), ('1.50', '1 1/2'), ('1.75', '1 3/4'), ('2', '2'), ('2.25', '2 1/4'), ('2.50', '2 1/2'), ('2.75', '2 3/4'), ('3.00', '3'), ('4.00', '4'), ('5.00', '5'), ('6.00', '6'), ('7.00', '7'), ('8.00', '8'), ('9.00', '9'), ('10.00', '10')], max_length=5),
         ),
         migrations.AddField(
             model_name='recipe',
             name='ingredient_meas',
-            field=models.CharField(choices=[('t', 'Teaspoon'), ('T', 'Tablespoon'), ('cup', 'Cup'), ('piece', 'Piece(s)')], default='None', max_length=5),
+            field=models.CharField(choices=[('t', 'Teaspoon'), ('T', 'Tablespoon'), ('cup', 'Cup'), ('piece', 'Piece(s)')], max_length=5),
         ),
         migrations.AddField(
             model_name='recipe',
             name='ingredient_name',
-            field=models.TextField(default='None', max_length=50),
+            field=models.CharField(max_length=50),
         ),
         migrations.AddField(
             model_name='recipe',

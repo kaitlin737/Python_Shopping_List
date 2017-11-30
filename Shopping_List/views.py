@@ -60,11 +60,13 @@ def bound_form(request, pk):
 #    return render(request,'Shopping_List/grocerylist_detail.html', {'form': form})
 
 def recipe_list():
-    context = {
+        saved_recipe_list = Recipe.objects.filter #(recipe_name.order_by('recipe_name'))
+        return render(request, 'Shopping_List/recipe_list.html')
+"""    context = {
         'heading': 'List of Recipes',
         'title': 'Recipe List',
         'recipe': recipe
-    }
+    }"""
 
 def recipe_add (request, recipe_id=None):
     errors = []
