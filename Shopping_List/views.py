@@ -6,6 +6,7 @@ from django.utils import timezone
 from .forms import GroceryForm
 from django import forms
 from django.shortcuts import redirect
+from .models import Recipe
 
 # Create your views here.
 def Home(request):
@@ -58,19 +59,14 @@ def bound_form(request, pk):
 #    form = GroceryListForm(instance=grocerylist)
 #    return render(request,'Shopping_List/grocerylist_detail.html', {'form': form})
 
-def recipelist():
+def recipe_list():
     context = {
         'heading': 'List of Recipes',
-        'title': 'Recipe List'
+        'title': 'Recipe List',
+        'recipe': recipe
     }
 
-"""def addrecipe():
-    context = {
-        'heading': 'To Add A Recipe',
-        'title': 'Add Recipe'
-    }"""
-
-def addrecipe(request, recipe_id=None):
+def recipe_add (request, recipe_id=None):
     errors = []
     if request.method == 'POST':
         # handle data posted from the from
@@ -90,9 +86,9 @@ def addrecipe(request, recipe_id=None):
         recipe.recipe_name = request.POST.get('recipe_name')
         final_ingredient == False
         while final_ingredient == False:
-            ingredients.ingredient_amt = request.POST.get('ingredient_amt')
-            ingredients.ingredient_meas = request.POST.get('ingredient_meas')
-            ingredients.ingredient_name = request.POST.get('ingredient_name')
+            recipe.ingredient_amt = request.POST.get('ingredient_amt')
+            recipe.ingredient_meas = request.POST.get('ingredient_meas')
+            recipe.ingredient_name = request.POST.get('ingredient_name')
             z = input("Would you like to add another ingredient? Enter y or yes to continue.")
             if (not z == "y" or z == "yes"):
                 final_ingredient == True
@@ -105,23 +101,20 @@ def addrecipe(request, recipe_id=None):
         if errors:
             data['heading'] = 'Add New Recipe'
             data['content'] = 'Fill in the following information:'
-            return render(request, 'Python_Shopping_List/add_recipe.html', data)
+            return render(request, 'Python_Shopping_List/recipe_add.html', data)
         else:
             recipe.recipe_name = string(recipe.recipe_name)
+            recipe.ingredient_amt = float(recipe.ingredient_amt)
+            recipe.ingredient_meas = float(recipe.ingredient_meas)
+            recipe.ingredient_name = float(recipe.ingredient_name)
+            recipe.notes = string(recipe.notes)
             recipe.save()
-            ingredients.ingredient_amt = float(ingredients.ingredient_amt)
-            ingredients.ingredient_meas = float(ingredients.ingredient_meas)
-            ingredients.ingredient_name = float(ingredients.ingredient_name)
-            ingredients.save()
-            notes.notes = string(notes.notes)
-            notes.save()
 
             data['heading'] = 'Success'
             data['content'] = 'Recipe added successfully!'
             data['recipe'] = recipe
-            data['ingredients'] = Ingredients
-            data['notes'] = notes
-            return render(request, 'Python_Shopping_List/add_recipe.html', data)
+
+            return render(request, 'Python_Shopping_List/recipe_add.html', data)
     else:
         if not recipe_id:
             # must be a get method to enter new grade info so render the form for user to enter
@@ -141,4 +134,4 @@ def addrecipe(request, recipe_id=None):
                 'errors': errors,
                 'recipe': recipe,
             }
-            return render(request, 'Python_Shopping_List/add_recipe.html', data)
+            return render(request, 'Python_Shopping_List/recipe_add.html', data)
