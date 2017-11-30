@@ -9,3 +9,19 @@ text-align: center
    height:250px;
    width:100%;
 }
+
+.jumbotron-custom{
+    background:url("http://www.foodwastealliance.org/wp-content/uploads/2013/05/iStock_000014489544Medium.jpg") center center;/*slide.jpg =>you image*/
+    margin-top: -20px;/*removes white space at top*/
+    background-size: cover;
+    text-align: center;
+    min-height:100%;
+    min-height: 100vh; /* fills full page     */
+    display: flex;
+    align-items: center;
+    display:block;
+}
+input {
+   width: 375px;
+   height: 225px;
+ }
