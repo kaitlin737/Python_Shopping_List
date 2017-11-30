@@ -1,0 +1,22 @@
+/*--.page-header {
+    background-color: #6666ff;
+    margin-top: 0;
+    padding: 20px 20px 20px 40px;
+}*/
+
+h1 a{
+    color: #00001a;
+    font-size: 36pt;
+    text-decoration: none;
+}
+
+
+h1 {
+    color: #00001a;
+    font-size: 36pt;
+    text-decoration: none;
+}
+.thumbnail img {
+   height:250px;
+   width:100%;
+}

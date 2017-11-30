@@ -1,0 +1,19 @@
+{% extends 'Shopping_List/base.html' %}
+
+{% block content %}
+
+
+<form action="/your-name/" method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+</form>
+  <div>
+        {% if grocerylist.created_date %}
+            <div>
+                {{ grocerylist.created_date }}
+            </div>
+        {% endif %}
+        <h1>{{ grocerylist.title }}</h1>
+        <p>{{ grocerylist.text|linebreaksbr }}</p>
+    </div>
+{% endblock %}}
