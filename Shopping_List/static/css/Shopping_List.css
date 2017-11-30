@@ -10,7 +10,6 @@ h1 a{
     text-decoration: none;
 }
 
-
 h1 {
     color: #00001a;
     font-size: 36pt;
@@ -20,3 +19,16 @@ h1 {
    height:250px;
    width:100%;
 }
+button{
+    position:absolute;
+    bottom: 5%;
+    right:20%;
+}
+
+.bordered {
+  box-sizing: content-box;
+  width: 100%;
+  border: solid #5B6DCD 10px;
+  padding: 5px;
+  margin-top: 10px;
+  }

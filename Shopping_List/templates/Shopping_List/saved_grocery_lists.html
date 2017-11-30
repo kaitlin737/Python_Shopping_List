@@ -1,13 +1,12 @@
 {% extends 'Shopping_List/base.html' %}
 
 {% block content %}
+    <a href="http://127.0.0.1:8000/Shopping_List/new/"><button class="btn btn-default" style="position:top;">New List</button></a>
     {% for Grocery_list in saved_lists%}
-        <div class="post">
-            <div class="date">
-                {{ Grocery_list.created_date }}
-            </div>
-            <h1><a href="{% url 'grocerylist_detail' pk=Grocery_list.pk %}">{{ Grocery_list.title }}</a></h1>
-            <p>{{ Grocery_list.text|linebreaksbr }}</p>
+        <div class="bordered">
+            {{ Grocery_list.created_date }}<br>
+            <a href="{% url 'grocerylist_detail' pk=Grocery_list.pk %}">{{ Grocery_list.title }}<br></a>
+            {{ Grocery_list.text|linebreaksbr }}<br>
         </div>
     {% endfor %}
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -15,6 +14,8 @@
     <div class="navbar-header">
       <a class="navbar-brand" href="#">Shopping List</a>
     </div>
+    <div class="col-md-3">
+</div>
     <ul class="nav navbar-nav">
       <li ><a href="http://127.0.0.1:8000/">Home</a></li>
       <li><a href="#">Recipes</a></li>
