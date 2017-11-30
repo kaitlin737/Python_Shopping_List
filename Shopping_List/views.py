@@ -6,12 +6,10 @@ from django.utils import timezone
 from .forms import GroceryForm
 from django import forms
 from django.shortcuts import redirect
-<<<<<<< HEAD
 from .models import Recipe
-=======
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
->>>>>>> master
+
 
 # Create your views here.
 def Home(request):
