@@ -1,31 +1,17 @@
 {% extends 'Shopping_List/base.html' %}
 
 {% block content %}
-<a href="http://127.0.0.1:8000/Shopping_List/Recipes/"><button type="button" class="btn btn-default btn-lg btn-block">Add New Recipe</button>
+<a href="http://127.0.0.1:8000/Shopping_List/Recipes/"><button type="button" class="btn btn-default btn-lg btn-block">Add Recipe</button>
     {% for Recipe in saved_recipe_list%}
 <div class="jumbotron">
   <div class="container">
-
-    <p>{{ Recipe.recipe_name }}</p><br>
-    <h1><a href="{% url 'grocerylist_detail' pk=Recipe.pk %}">{{ Grocery_list.title }}</h1><br></a>
+    <!--
+    <p>{{ Grocery_list.created_date }}</p><br>
+    <h1><a href="{% url 'grocerylist_detail' pk=Grocery_list.pk %}">{{ Grocery_list.title }}</h1><br></a>
     <p>{{ Grocery_list.text|linebreaksbr }}<p><br>
-
+    -->
+    <p>Add Recipe<p>
   </div>
 </div>
     {% endfor %}
-
-
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="http://127.0.0.1:8000/">Shopping List</a>
-    </div>
-
-    <ul class="nav navbar-nav">
-      <li ><a href="http://127.0.0.1:8000/">Home</a></li>
-      <li><a href="http://127.0.0.1:8000/Shopping_List/saved_recipe_list/">Recipes</a></li>
-      <li><a href="#">Menu</a></li>
-      <li class="active"><a href="http://127.0.0.1:8000/Shopping_List/saved_lists/">Grocery List</a></li>
-    </ul>
-  </div>
-</nav>
+{% endblock %}

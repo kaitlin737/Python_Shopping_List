@@ -45,11 +45,14 @@ MEASURES = (
 )
 
 class Recipe(models.Model):
-    recipe_name = models.CharField(max_length = 50)
+    recipe_name = models.CharField(max_length = 50, default = "Shrimp Scampi")
     ingredient_amt = models.FloatField(max_length = 5, default = 0, choices = AMOUNTS)
     ingredient_meas = models.CharField(max_length = 5, default = "", choices = MEASURES)
-    ingredient_name = models.TextField(max_length = 50, default = "")
+    ingredient_name = models.TextField(max_length = 50, default = "Hello Notes")
     notes = models.TextField()
 
     def __str__(self):
         return self.recipe_name
+
+    class Meta:
+        ordering = ["recipe_name"]
