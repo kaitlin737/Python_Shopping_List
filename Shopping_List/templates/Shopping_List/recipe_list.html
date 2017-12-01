@@ -1,0 +1,22 @@
+{% extends 'Shopping_List/base.html' %}
+
+{% block content %}
+    {% for Recipe in saved_krecipe_list%}
+    <div>
+      <p>"Hello recipe list"</p>
+    </div>
+    {% endfor %}
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Shopping List</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li ><a href="http://127.0.0.1:8000/">Home</a></li>
+      <li><a href="http://127.0.0.1:8000/Shopping_List/saved_recipe_list/">Recipes</a></li>
+      <li><a href="#">Menu</a></li>
+      <li class="active"><a href="http://127.0.0.1:8000/Shopping_List/saved_lists/">Grocery List</a></li>
+    </ul>
+  </div>
+</nav>
+{% endblock %}

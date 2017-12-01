@@ -7,9 +7,6 @@ from .forms import GroceryForm
 from django import forms
 from django.shortcuts import redirect
 from .models import Recipe
-from django.contrib.auth import login, authenticate
-from django.contrib.auth.forms import UserCreationForm
-
 
 # Create your views here.
 def Home(request):
@@ -55,24 +52,15 @@ class GroceryListForm(forms.ModelForm):
         fields = ("title","text" )
 def bound_form(request, pk):
     grocerylist = get_object_or_404(Grocery_list, pk=pk)
+    #form = GroceryListForm(instance=grocerylist)
     return render(request,'Shopping_List/grocerylist_detail.html', {'grocerylist': grocerylist})
+#def bound_form(request, pk):
+#    grocerylist = get_object_or_404(Grocery_list, pk=pk)
+#    form = GroceryListForm(instance=grocerylist)
+#    return render(request,'Shopping_List/grocerylist_detail.html', {'form': form})
 
-def signup(request):
-    if request.method == 'POST':
-        form=UserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username=form.cleaned_data.get('username')
-            raw_password=form.cleaned_data.get('password1')
-            user=authenticate(username=username,password=raw_password)
-            login(request,user)
-            return redirect('Home')
-    else:
-        form=UserCreationForm()
-    return render(request,'signup.html',{'form':form})
-def recipelist():
+def recipe_list():
     context = {
-
         'heading': 'List of Recipes',
         'title': 'Recipe List',
         'recipe': recipe
