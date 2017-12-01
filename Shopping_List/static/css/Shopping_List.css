@@ -21,7 +21,34 @@ text-align: center
     align-items: center;
     display:block;
 }
-input {
-   width: 375px;
-   height: 225px;
+.jumbotron-2{
+  background-color:#99ccff;
+  margin-top: 20px;
+  margin-left: 150px;
+  padding: 0px;
+  width:80%;
+  text-align: center
+}
+.customCSS1{
+  margin-top:50px;
+  margin-bottom:150px;
+  border-radius:5px;
  }
+.customCSS2{
+  width: 20%;
+  height:100%;
+  margin-left: 460px;
+  border-radius:5px;
+}
+
+.listing{
+  font-size:24px;
+  text-align: center;
+  align-items: center;
+}
+.details{
+  text-align: center;
+  font-size: 42px;
+  margin-bottom: 50px;
+
+}
