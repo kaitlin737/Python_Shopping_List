@@ -50,3 +50,6 @@ class Recipe(models.Model):
     ingredient_meas = models.CharField(max_length = 5, default = "", choices = MEASURES)
     ingredient_name = models.TextField(max_length = 50, default = "")
     notes = models.TextField()
+
+    def __str__(self):
+        return self.recipe_name

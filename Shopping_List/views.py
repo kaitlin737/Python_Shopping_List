@@ -1,12 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Grocery_list
+from .models import Recipe
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
-from .forms import GroceryForm
+#from .forms import GroceryForm
+#rom .forms import RecipeForm
 from django import forms
 from django.shortcuts import redirect
-from .models import Recipe
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 
@@ -70,13 +71,14 @@ def signup(request):
     else:
         form=UserCreationForm()
     return render(request,'signup.html',{'form':form})
-def recipelist():
-    context = {
 
-        'heading': 'List of Recipes',
-        'title': 'Recipe List',
-        'recipe': recipe
-    }
+def recipe_list(request):
+        saved_recipe_list = Recipe.objects.filter #(recipe_name.order_by('recipe_name'))
+        return render(request, 'Shopping_List/recipe_list.html',{'saved_recipe_list':saved_recipe_list})
+
+"""def saved_grocery_lists(request):
+    saved_lists = Grocery_list.objects.filter(created_date__lte=timezone.now()).order_by('created_date')
+    return render(request, 'Shopping_List/saved_grocery_lists.html', {'saved_lists':saved_lists})"""
 
 def recipe_add (request, recipe_id=None):
     errors = []
