@@ -1,4 +1,6 @@
+
 {% extends 'Shopping_List/base.html' %}
+
 {% block content %}
     <div >
       <h1>Welcome to our App </h1>
@@ -37,4 +39,27 @@
           </div>
       </div>
     </div>
+<<<<<<< HEAD
+    
+=======
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Shopping List</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="http://127.0.0.1:8000/">Home</a></li>
+      <li><a href="http://127.0.0.1:8000/Shopping_List/saved_recipe_list/">Recipes</a></li>
+      <li><a href="#">Menu</a></li>
+      <li><a href="http://127.0.0.1:8000/Shopping_List/saved_lists/">Grocery List</a></li>
+      {% if request.user.is_authenticated %}<li>Welcome '{{ request.user.username }}'</li>
+      <li><a href="http://127.0.0.1:8000/logout/">Logout</a></li>
+      {% else %}<li><a href="http://127.0.0.1:8000/login/">Login </a></li>
+      {% endif %}
+      <li><a href="http://127.0.0.1:8000/signup/">Sign up</a></li>
+    </ul>
+  </div>
+</nav>
+>>>>>>> e15a304eed4abaa8ee1d18ef41843a00fc4b94ad
 {% endblock %}}
+</html>
