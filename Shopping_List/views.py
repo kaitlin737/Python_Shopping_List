@@ -27,7 +27,14 @@ def grocery_new(request):
         form=GroceryForm()
     return render(request,'Shopping_List/grocerylist_edit.html',{'form':form})
 
-
+def grocerylist_detail(request,pk):
+     #saved_lists=get_object_or_404(Grocery_list,pk=pk)
+     #return render(request, 'Shopping_List/grocerylist_detail.html',{'saved_lists':saved_lists})
+     #title = get_object_or_404(Grocery_list, pk=pk)
+     #text = get_object_or_404(Grocery_list, pk=pk)
+     #Grocery_list.title=Grocery_list.objects.get(pk=pk)
+     Grocery_list=get_object_or_404(Grocery_list,pk=pk)
+     return render(request, 'Shopping_List/grocerylist_detail.html',{'Grocery_list':Grocery_list})
 
 def saved_grocery_lists(request):
     saved_lists = Grocery_list.objects.filter(created_date__lte=timezone.now()).order_by('created_date')
@@ -48,6 +55,13 @@ def grocerylist_edit(request,pk):
     else:
         form = GroceryForm(instance=grocerylist)
     return render(request, 'Shopping_List/grocerylist_edit.html', {'form': form})
+
+def grocery_delete(request, pk):
+    grocerylist = get_object_or_404(Grocery_list, pk=pk)
+    if request.method == 'POST':
+        grocerylist.delete()
+        return redirect('saved_grocery_lists')
+    return render(request,'Shopping_List/grocerylist_detail.html', {'grocerylist': grocerylist})
 
 class GroceryListForm(forms.ModelForm):
     class Meta:

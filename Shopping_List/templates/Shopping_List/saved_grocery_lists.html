@@ -5,7 +5,6 @@
     {% for Grocery_list in saved_lists%}
 <div class="jumbotron">
   <div class="container">
-
     <p>{{ Grocery_list.created_date }}</p><br>
     <h1><a href="{% url 'grocerylist_detail' pk=Grocery_list.pk %}">{{ Grocery_list.title }}</h1><br></a>
     <p>{{ Grocery_list.text|linebreaksbr }}<p><br>
