@@ -1,12 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Grocery_list
+from .models import Recipe
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
-from .forms import GroceryForm
+#from .forms import GroceryForm
+#rom .forms import RecipeForm
 from django import forms
 from django.shortcuts import redirect
-from .models import Recipe
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 
@@ -30,7 +31,7 @@ def grocery_new(request):
 def grocerylist_detail(request,pk):
      #saved_lists=get_object_or_404(Grocery_list,pk=pk)
      #return render(request, 'Shopping_List/grocerylist_detail.html',{'saved_lists':saved_lists})
-     #title = get_object_or_404(Grocery_list, pk=pk)
+     #title  get_object_or_404(Grocery_list, pk=pk)
      #text = get_object_or_404(Grocery_list, pk=pk)
      #Grocery_list.title=Grocery_list.objects.get(pk=pk)
      Grocery_list=get_object_or_404(Grocery_list,pk=pk)
@@ -84,13 +85,24 @@ def signup(request):
     else:
         form=UserCreationForm()
     return render(request,'signup.html',{'form':form})
-def recipelist():
-    context = {
 
-        'heading': 'List of Recipes',
-        'title': 'Recipe List',
-        'recipe': recipe
-    }
+def recipe_list(request):
+        saved_recipe_list = Recipe.objects.filter #(recipe_name.order_by('recipe_name'))
+        return render(request, 'Shopping_List/recipe_list.html',{'saved_recipe_list':saved_recipe_list})
+
+class RecipeForm(forms.ModelForm):
+    class Meta:
+        model = Recipe
+        fields = ('recipe_name',)
+
+def recipe_bound_form(request, pk):
+    recipelist = get_object_or_404(Recipe, pk=pk)
+    return render(request,'Shopping_List/recipe_list.html', {'recipelist': recipelist})
+
+class RecipeAddForm(forms.ModelForm):
+    class Meta:
+        model = Recipe
+        fields = ('recipe_name','ingredient_amt','ingredient_meas','ingredient_name','notes')
 
 def recipe_add (request, recipe_id=None):
     errors = []
@@ -98,19 +110,19 @@ def recipe_add (request, recipe_id=None):
         # handle data posted from the from
         if not request.POST.get('recipe_name', ''):
             errors.append('Enter Recipe Name.')
-        if not request.POST.get('ingredient_amt', ''):
+        """if not request.POST.get('ingredient_amt', ''):
             errors.append('Enter Ingredient Amount')
         if not request.POST.get('ingredient_meas', ''):
             errors.append('Enter Ingredient Measure')
         if not request.POST.get('ingredient_name', ''):
-            errors.append('Enter Ingredient Name')
+            errors.append('Enter Ingredient Name')"""
 
         if recipe_id:
             recipe = recipe.objects.get(pk=recipe_id)
         else:
             recipe = Recipe()
         recipe.recipe_name = request.POST.get('recipe_name')
-        final_ingredient == False
+        """final_ingredient == False
         while final_ingredient == False:
             recipe.ingredient_amt = request.POST.get('ingredient_amt')
             recipe.ingredient_meas = request.POST.get('ingredient_meas')
@@ -119,7 +131,7 @@ def recipe_add (request, recipe_id=None):
             if (not z == "y" or z == "yes"):
                 final_ingredient == True
                 break
-        notes.notes = requiest.POST.get('Notes')
+        notes.notes = requiest.POST.get('Notes')"""
         data = {
             'errors': errors,
             'recipe': recipe,
@@ -130,10 +142,10 @@ def recipe_add (request, recipe_id=None):
             return render(request, 'Python_Shopping_List/recipe_add.html', data)
         else:
             recipe.recipe_name = string(recipe.recipe_name)
-            recipe.ingredient_amt = float(recipe.ingredient_amt)
+            """recipe.ingredient_amt = float(recipe.ingredient_amt)
             recipe.ingredient_meas = float(recipe.ingredient_meas)
             recipe.ingredient_name = float(recipe.ingredient_name)
-            recipe.notes = string(recipe.notes)
+            recipe.notes = string(recipe.notes)"""
             recipe.save()
 
             data['heading'] = 'Success'
