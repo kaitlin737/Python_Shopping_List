@@ -45,7 +45,7 @@ MEASURES = (
 )
 
 class Recipe(models.Model):
-    recipe_name = models.CharField(max_length = 50, default = "Test",)
+    recipe_name = models.CharField(max_length = 50, default = "Test")
     ingredients = models.ForeignKey('Ingredients', default = 0)
     notes = models.TextField()
 
