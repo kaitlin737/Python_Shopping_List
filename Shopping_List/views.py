@@ -4,7 +4,7 @@ from .models import Grocery_list
 from .models import Recipe
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
-#from .forms import GroceryForm
+from .forms import GroceryForm
 #rom .forms import RecipeForm
 from django import forms
 from django.shortcuts import redirect
@@ -27,6 +27,19 @@ def grocery_new(request):
     else:
         form=GroceryForm()
     return render(request,'Shopping_List/grocerylist_edit.html',{'form':form})
+
+def edit_list(request,pk):
+    grocerylist=get_object_or_404(Grocery_list,pk=pk)
+    if request.method == 'POST':
+        form = GroceryForm(request.POST, instance=grocerylist)
+        if form.is_valid():
+            grocerylist = form.save(commit=False)
+            grocerylist.created_date = timezone.now()
+            grocerylist.save()
+            return redirect('grocerylist_detail',pk=grocerylist.pk)
+    else:
+        form = GroceryForm(instance=grocerylist)
+    return render(request,"Shopping_List/grocerylist_edit.html", {'form':form,'pk':grocerylist})
 
 def grocerylist_detail(request,pk):
      #saved_lists=get_object_or_404(Grocery_list,pk=pk)

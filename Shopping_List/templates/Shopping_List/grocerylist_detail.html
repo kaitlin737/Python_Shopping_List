@@ -13,13 +13,6 @@
         <p class="listing">{{ grocerylist.text|linebreaksbr }}</p>
       </div>
     </div>
-    <form action="{% url 'grocery_delete' grocerylist.pk %}" method="post">
-    {% csrf_token %}
-    <input type="submit" value="Delete">
-    </form>
-
+    <a class="btn btn-primary" href="{% url 'edit_list' pk=grocerylist.pk %}"><span> Edit List</span></a>
+    <a class="btn btn-danger" href="{% url 'grocery_delete' grocerylist.pk %}"><span> Delete List</span></a>
 {% endblock %}}
-<a href="http://127.0.0.1:8000/Shopping_List/saved_lists/" class="btn btn-primary a-btn-slide-text">
-<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-<span><strong>Delete</strong></span>
-</a>
