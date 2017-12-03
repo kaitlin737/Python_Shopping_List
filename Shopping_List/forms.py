@@ -1,6 +1,8 @@
 from django import forms
 from .models import Grocery_list
 from .models import Recipe
+from .models import Ingredients
+from betterforms.multiform import MultiModelForm
 
 class GroceryForm(forms.ModelForm):
     class Meta:
@@ -12,7 +14,13 @@ class RecipeForm(forms.ModelForm):
         model = Recipe
         fields = ('recipe_name',)
 
-class RecipeAddForm(forms.ModelForm):
+class IngredientForm(forms.ModelForm):
     class Meta:
-        model = Recipe
-        fields = ('recipe_name','ingredient_amt','ingredient_meas','ingredient_name','notes')
+        model = Ingredients
+        fields = ('ingredient_amt', 'ingredient_meas','ingredient_name')
+
+class RecipeMultiForm(MultiModelForm):
+    form_classes = {
+        'recipe':RecipeForm,
+        'ingredients':IngredientForm,
+   }

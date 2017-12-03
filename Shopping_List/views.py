@@ -4,13 +4,13 @@ from .models import Grocery_list
 from .models import Recipe
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
-from .forms import GroceryForm
+#from .forms import GroceryForm
 #rom .forms import RecipeForm
 from django import forms
 from django.shortcuts import redirect
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
-
+from .forms import RecipeMultiForm
 
 # Create your views here.
 def Home(request):
@@ -103,7 +103,7 @@ def signup(request):
     return render(request,'signup.html',{'form':form})
 
 def recipe_list(request):
-        saved_recipe_list = Recipe.objects.all().order_by('recipe_name')
+        saved_recipe_list = Recipe.objects.all()
         return render(request, 'Shopping_List/recipe_list.html',{'saved_recipe_list':saved_recipe_list})
 
 class RecipeForm(forms.ModelForm):
@@ -116,6 +116,7 @@ def recipe_bound_form(request, pk):
     return render(request,'Shopping_List/recipe_list.html', {'recipelist': recipelist})
 
 def add_recipe(request):
+    form_class = RecipeMultiForm
     if request.method == 'POST':
         form = RecipeMultiForm(request.POST)
         if form.is_valid():

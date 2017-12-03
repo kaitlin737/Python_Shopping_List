@@ -3,8 +3,8 @@ from django.utils import timezone
 
 # Create your models here.
 class Grocery_list(models.Model):
-    title = models.CharField(max_length=140)
-    text=models.TextField()
+    title = models.CharField(max_length=140, default = "AAA")
+    text=models.TextField(default = " ")
     created_date=models.DateTimeField(default=timezone.now)
     owner = models.ForeignKey('auth.User',null=True)
     def publish(self):
