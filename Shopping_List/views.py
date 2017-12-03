@@ -100,7 +100,7 @@ def signup(request):
     return render(request,'signup.html',{'form':form})
 
 def recipe_list(request):
-        saved_recipe_list = Recipe.objects.filter #(recipe_name.order_by('recipe_name'))
+        saved_recipe_list = Recipe.objects.all().order_by('recipe_name')
         return render(request, 'Shopping_List/recipe_list.html',{'saved_recipe_list':saved_recipe_list})
 
 class RecipeForm(forms.ModelForm):
@@ -112,10 +112,29 @@ def recipe_bound_form(request, pk):
     recipelist = get_object_or_404(Recipe, pk=pk)
     return render(request,'Shopping_List/recipe_list.html', {'recipelist': recipelist})
 
-class RecipeAddForm(forms.ModelForm):
-    class Meta:
-        model = Recipe
-        fields = ('recipe_name','ingredient_amt','ingredient_meas','ingredient_name','notes')
+def add_recipe(request):
+    if request.method == 'POST':
+        form = RecipeMultiForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data[recipe_name]
+            query = Recipe(recipe_name = recipe_name)
+            query.save()
+    else:
+        form = RecipeMultiForm()
+
+"""
+def grocery_new(request):
+    if request.method == "POST":
+        form=GroceryForm(request.POST)
+        if form.is_valid():
+            Grocery_list=form.save(commit=False)
+            Grocery_list.created_date=timezone.now()
+            Grocery_list.save()
+            return redirect('grocerylist_detail',pk=Grocery_list.pk)
+    else:
+        form=GroceryForm()
+    return render(request,'Shopping_List/grocerylist_edit.html',{'form':form})
+
 
 def recipe_add (request, recipe_id=None):
     errors = []
@@ -123,19 +142,19 @@ def recipe_add (request, recipe_id=None):
         # handle data posted from the from
         if not request.POST.get('recipe_name', ''):
             errors.append('Enter Recipe Name.')
-        """if not request.POST.get('ingredient_amt', ''):
+        if not request.POST.get('ingredient_amt', ''):
             errors.append('Enter Ingredient Amount')
         if not request.POST.get('ingredient_meas', ''):
             errors.append('Enter Ingredient Measure')
         if not request.POST.get('ingredient_name', ''):
-            errors.append('Enter Ingredient Name')"""
+            errors.append('Enter Ingredient Name')
 
         if recipe_id:
             recipe = recipe.objects.get(pk=recipe_id)
         else:
             recipe = Recipe()
         recipe.recipe_name = request.POST.get('recipe_name')
-        """final_ingredient == False
+        final_ingredient == False
         while final_ingredient == False:
             recipe.ingredient_amt = request.POST.get('ingredient_amt')
             recipe.ingredient_meas = request.POST.get('ingredient_meas')
@@ -144,7 +163,7 @@ def recipe_add (request, recipe_id=None):
             if (not z == "y" or z == "yes"):
                 final_ingredient == True
                 break
-        notes.notes = requiest.POST.get('Notes')"""
+        notes.notes = requiest.POST.get('Notes')
         data = {
             'errors': errors,
             'recipe': recipe,
@@ -155,10 +174,10 @@ def recipe_add (request, recipe_id=None):
             return render(request, 'Python_Shopping_List/recipe_add.html', data)
         else:
             recipe.recipe_name = string(recipe.recipe_name)
-            """recipe.ingredient_amt = float(recipe.ingredient_amt)
+            recipe.ingredient_amt = float(recipe.ingredient_amt)
             recipe.ingredient_meas = float(recipe.ingredient_meas)
             recipe.ingredient_name = float(recipe.ingredient_name)
-            recipe.notes = string(recipe.notes)"""
+            recipe.notes = string(recipe.notes)
             recipe.save()
 
             data['heading'] = 'Success'
@@ -186,3 +205,4 @@ def recipe_add (request, recipe_id=None):
                 'recipe': recipe,
             }
             return render(request, 'Python_Shopping_List/recipe_add.html', data)
+"""
