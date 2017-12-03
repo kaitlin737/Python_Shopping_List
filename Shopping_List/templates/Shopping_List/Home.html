@@ -3,6 +3,9 @@
 
 {% block content %}
     <div >
+      {% if user.is_authenticated %}
+      <h3>Hello, {{ user.username }}</h3>
+      {% endif %}
       <h1>Welcome to our App </h1>
     </div>
     <div>

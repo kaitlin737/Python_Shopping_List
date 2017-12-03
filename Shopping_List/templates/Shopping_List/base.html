@@ -56,7 +56,11 @@
                             </li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a href="http://127.0.0.1:8000/login/">Login</a></li>
+                          {% if request.user.is_authenticated %}<li "margin-right:200px;">Welcome '{{ request.user.username }}'</li>
+                          <li style="margin-right:200px;"><a href="http://127.0.0.1:8000/logout/">Logout</a></li>
+                          {% else %}<li style="margin-right:200px;"><a href="http://127.0.0.1:8000/login/">Login </a></li>
+                          {% endif %}
+
                         </ul>
                     </div>
                 </nav>
