@@ -22,6 +22,7 @@ def grocery_new(request):
         if form.is_valid():
             Grocery_list=form.save(commit=False)
             Grocery_list.created_date=timezone.now()
+            Grocery_list.owner = request.user
             Grocery_list.save()
             return redirect('grocerylist_detail',pk=Grocery_list.pk)
     else:
@@ -51,7 +52,9 @@ def grocerylist_detail(request,pk):
      return render(request, 'Shopping_List/grocerylist_detail.html',{'Grocery_list':Grocery_list})
 
 def saved_grocery_lists(request):
-    saved_lists = Grocery_list.objects.filter(created_date__lte=timezone.now()).order_by('created_date')
+    user = request.user
+    saved_lists = Grocery_list.objects.filter(owner=user)
+    #saved_lists = Grocery_list.objects.filter(created_date__lte=timezone.now()).order_by('created_date')
     return render(request, 'Shopping_List/saved_grocery_lists.html', {'saved_lists':saved_lists})
 
 def grocerylist_edit(request,pk):
