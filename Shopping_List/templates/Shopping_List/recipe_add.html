@@ -1,17 +1,30 @@
 {% extends 'Shopping_List/base.html' %}
-
 {% block content %}
-<a href="http://127.0.0.1:8000/Shopping_List/Recipes/"><button type="button" class="btn btn-default btn-lg btn-block">Add Recipe</button>
-    {% for Recipe in saved_recipe_list%}
-<div class="jumbotron">
-  <div class="container">
-    <!--
-    <p>{{ Grocery_list.created_date }}</p><br>
-    <h1><a href="{% url 'grocerylist_detail' pk=Grocery_list.pk %}">{{ Grocery_list.title }}</h1><br></a>
-    <p>{{ Grocery_list.text|linebreaksbr }}<p><br>
-    -->
-    <p>Add Recipe<p>
-  </div>
-</div>
-    {% endfor %}
+
+<body>
+    <div class="jumbotron-custom">
+    <div class="container">
+      <h1>New Recipe</h1>
+      <form method = "POST" class = "post-form">
+        {% load widget_tweaks %}
+        {% csrf_token %}
+          <div class=""form-inline"">
+            <label>Recipe Name</label>
+              {{ form.as_p }}
+            <label>Ingredients</label>
+              {{ sub_form.as_p }}
+          </div>
+          <!--
+          <div class="form-group">
+             <label>Items</label>
+
+            {{form.text |add_class:"form-control customCSS2"}}
+          </div>
+        -->
+          <button type="submit" class="save btn btn-default">Save</button>
+  `     `</form>
+  {{ form.media.js }}
+    </div>
+    </div>
+</body>
 {% endblock %}

@@ -11,6 +11,8 @@ from django.shortcuts import redirect
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from .forms import RecipeMultiForm
+from .forms import RecipeMultiForm
+from .forms import IngredientForm
 
 # Create your views here.
 def Home(request):
@@ -116,17 +118,33 @@ def recipe_bound_form(request, pk):
     return render(request,'Shopping_List/recipe_list.html', {'recipelist': recipelist})
 
 def add_recipe(request):
-    form_class = RecipeMultiForm
+    form = RecipeForm(prefix="rec")
+    sub_form = IngredientForm(prefix="ing")
+    if request.method == "POST":
+        form = RecipeForm(request.POST, prefix="rec")
+        sub_form = IngredientForm(request.POST, prefix="ing")
+        if form.is_valid() and sub_form.is_valid:
+            Recipe = form.save(commit=False)
+            Recipe.ingredients = sub_form.save()
+            recipe.save()
+            return __goto__Recipe(Recipe)
+    else:
+        form=RecipeForm()
+    return render(request,'Shopping_List/recipe_add.html',{'form':form})
+
+"""
+def add_recipe(request):
+    #form_class = RecipeMultiForm
+    form = RecipeForm
     if request.method == 'POST':
-        form = RecipeMultiForm(request.POST)
+        form = RecipeForm(request.POST)
         if form.is_valid():
             name = form.cleaned_data[recipe_name]
             query = Recipe(recipe_name = recipe_name)
             query.save()
     else:
-        form = RecipeMultiForm()
+        form = RecipeForm()
 
-"""
 def grocery_new(request):
     if request.method == "POST":
         form=GroceryForm(request.POST)
