@@ -13,6 +13,6 @@
         <p class="listing">{{ grocerylist.text|linebreaksbr }}</p>
       </div>
     </div>
-    <a class="btn btn-primary" href="{% url 'edit_list' pk=grocerylist.pk %}"><span> Edit List</span></a>
+    <a class="btn btn-primary" style="margin-left:450px;" href="{% url 'edit_list' pk=grocerylist.pk %}"><span> Edit List</span></a>
     <a class="btn btn-danger" href="{% url 'grocery_delete' grocerylist.pk %}"><span> Delete List</span></a>
 {% endblock %}}
