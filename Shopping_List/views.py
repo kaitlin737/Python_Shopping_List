@@ -119,5 +119,5 @@ def add_recipe(request):
             Recipe.save()
             return redirect('recipe_add',pk=Recipe.pk)
     else:
-            form = RecipeForm
+            form = RecipeForm()
     return render(request,'Shopping_List/recipe_add.html',{'form':form})
