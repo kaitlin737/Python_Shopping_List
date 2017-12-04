@@ -2,32 +2,17 @@
 
 {% block content %}
 
-
-<form action="/your-name/" method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-</form>
   <div>
         {% if grocerylist.created_date %}
-            <div>
+            <div class="listing">
                 {{ grocerylist.created_date }}
             </div>
         {% endif %}
-        <h1>{{ grocerylist.title }}</h1>
-        <p>{{ grocerylist.text|linebreaksbr }}</p>
+        <h1 class="details">{{ grocerylist.title }}</h1>
+        <div class="jumbotron-2">
+        <p class="listing">{{ grocerylist.text|linebreaksbr }}</p>
+      </div>
     </div>
+    <a class="btn btn-primary" style="margin-left:450px;" href="{% url 'edit_list' pk=grocerylist.pk %}"><span> Edit List</span></a>
+    <a class="btn btn-danger" href="{% url 'grocery_delete' grocerylist.pk %}"><span> Delete List</span></a>
 {% endblock %}}
-<nav class="navbar navbar-inverse navbar-fixed-top">
-<div class="container-fluid">
-<div class="navbar-header">
-  <a class="navbar-brand" href="http://127.0.0.1:8000/">Shopping List</a>
-</div>
-
-<ul class="nav navbar-nav">
-  <li ><a href="http://127.0.0.1:8000/">Home</a></li>
-  <li><a href="#">Recipes</a></li>
-  <li><a href="#">Menu</a></li>
-  <li class="active"><a href="http://127.0.0.1:8000/Shopping_List/saved_lists/">Grocery List</a></li>
-</ul>
-</div>
-</nav>

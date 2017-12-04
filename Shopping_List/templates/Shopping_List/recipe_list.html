@@ -1,14 +1,17 @@
 {% extends 'Shopping_List/base.html' %}
 
 {% block content %}
-<a href="http://127.0.0.1:8000/Shopping_List/new/"><button type="button" class="btn btn-default btn-lg btn-block">New Grocery List</button>
-    {% for Grocery_list in saved_lists%}
+<a href="http://127.0.0.1:8000/Shopping_List/Recipes/"><button type="button" class="btn btn-default btn-lg btn-block">Add Recipe</button>
+    {% for Recipe in saved_recipe_list%}
 <div class="jumbotron">
   <div class="container">
+
+    <h1><p>a href="">{{ Recipe.recipe_name }}</a></p></h1><br>
+<!--
     <p>{{ Grocery_list.created_date }}</p><br>
     <h1><a href="{% url 'grocerylist_detail' pk=Grocery_list.pk %}">{{ Grocery_list.title }}</h1><br></a>
     <p>{{ Grocery_list.text|linebreaksbr }}<p><br>
-
+-->
   </div>
 </div>
     {% endfor %}
