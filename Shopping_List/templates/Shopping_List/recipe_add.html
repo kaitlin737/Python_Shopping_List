@@ -1,29 +1,11 @@
 {% extends 'Shopping_List/base.html' %}
+
 {% block content %}
 
-<body>
-    <div class="jumbotron-custom">
-    <div class="container">
-      <h1>New Recipe</h1>
-      <form method = "POST">
-        {% load widget_tweaks %}
-        {% csrf_token %}
-          <div class=""form-inline"">
-            <label>Recipe Name</label>
-              {{ form.recipe_name | add_class:"customCSS1" }}
-
-          </div>
-          <!--
-          <div class="form-group">
-             <label>Items</label>
-
-            {{form.text |add_class:"form-control customCSS2"}}
-          </div>
-        -->
-          <button type="submit" class="save btn btn-default">Save</button>
-        </form>
-  {{ form.media.js }}
+    <div>
+        <h1 class="details">{{ recipe.recipe_name }}</h1>
+        <div class="jumbotron-2">
     </div>
-    </div>
-</body>
-{% endblock %}
+    <a class="btn btn-primary" href="{% url 'edit_list' pk=recipelist.pk %}"><span> Edit List</span></a>
+    <a class="btn btn-danger" href="{% url 'recipe_delete' recipelist.pk %}"><span> Delete List</span></a>
+{% endblock %}}

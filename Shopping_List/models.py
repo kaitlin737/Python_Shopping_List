@@ -46,9 +46,7 @@ MEASURES = (
 )
 
 class Recipe(models.Model):
-    recipe_name = models.CharField(max_length = 50, default = "Test")
-    ingredients = models.ForeignKey('Ingredients', default = 0)
-    notes = models.TextField()
+    recipe_name = models.CharField(max_length = 50, default = "")
 
     def __str__(self):
         return self.recipe_name
@@ -57,9 +55,17 @@ class Recipe(models.Model):
         ordering = ["recipe_name"]
 
 class Ingredients(models.Model):
+    recipe = models.ForeignKey(Recipe, default = -1)
     ingredient_amt = models.FloatField(max_length = 5, default = 0, choices = AMOUNTS)
     ingredient_meas = models.CharField(max_length = 5, default = "", choices = MEASURES)
-    ingredient_name = models.TextField(max_length = 50, default = "Hello Notes")
+    ingredient_name = models.TextField(max_length = 50, default = "")
 
     def __str__(self):
         return "%s %s %s" %(self.ingredient_amt, self.ingredient_meas, self.ingredient_name)
+
+class Notes(models.Model):
+    recipe = models.ForeignKey(Recipe)
+    notes = models.TextField()
+
+    def __str__(self):
+        return self.notes

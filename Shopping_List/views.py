@@ -119,5 +119,41 @@ def add_recipe(request):
             Recipe.save()
             return redirect('recipe_add',pk=Recipe.pk)
     else:
-            form = RecipeForm
+        form = RecipeForm
     return render(request,'Shopping_List/recipe_add.html',{'form':form})
+
+def edit_recipe(request,pk):
+    recipelist=get_object_or_404(Recipe,pk=pk)
+    if request.method == 'POST':
+        form = RecipeForm(request.POST, instance=recipelist)
+        if form.is_valid():
+            recipelist = form.save(commit=False)
+            recipelist.save()
+            return redirect('recipe_add',pk=recipelist.pk)
+    else:
+        form = RecipeForm(instance=recipelist)
+    return render(request,"Shopping_List/recipe_edit.html", {'form':form,'pk':recipelist})
+
+def recipe_detail(request,pk):
+     Recipe=get_object_or_404(Recipe,pk=pk)
+     return render(request, 'Shopping_List/recipe_add.html',{'Recipe':Recipe})
+
+
+def recipelist_edit(request,pk):
+     recipelist = get_object_or_404(Recipe, pk=pk)
+     if request.method == "POST":
+         form = RecipeForm(request.POST, instance=recipelist)
+         if form.is_valid():
+             recipelist = form.save(commit=False)
+             recipelist.save()
+             return redirect('recipe_edit', pk=recipelist.pk)
+     else:
+         form = RecipeForm(instance=recipelist)
+     return render(request, 'Shopping_List/recipe_edit.html', {'form': form})
+
+def recipe_delete(request, pk):
+     recipelist = get_object_or_404(Recipe, pk=pk)
+     if request.method == 'POST':
+         recipelist.delete()
+         return redirect('saved_recipe_lists')
+     return render(request,'Shopping_List/recipe_add.html', {'recipelist': recipelist})
