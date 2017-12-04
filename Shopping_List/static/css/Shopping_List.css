@@ -10,6 +10,9 @@ text-align: center
    width:100%;
 }
 
+.name-label{
+  margin-right:25px;
+}
 .jumbotron-custom{
     background:url("http://www.foodwastealliance.org/wp-content/uploads/2013/05/iStock_000014489544Medium.jpg") center center;/*slide.jpg =>you image*/
     margin-top: -20px;/*removes white space at top*/
@@ -21,23 +24,40 @@ text-align: center
     align-items: center;
     display:block;
 }
+.btn btn-danger{
+  margin-left:450px;
+}
 .jumbotron-2{
   background-color:#99ccff;
   margin-top: 20px;
-  margin-left: 150px;
   padding: 0px;
-  width:80%;
-  text-align: center
+  margin-left: 450px;
+  margin-right:450px;
+}
+.title-form{
+  margin-top: -20px;
+}
+.form-inline-unique{
+  font-size: 14pt;
+  display:block;
+  margin-bottom: -40px;
+  margin-top:50px;
+}
+.form-inline-unique2{
+  font-size: 14pt;
+  display:block;
+  margin-top:-60px;
 }
 .customCSS1{
   margin-top:50px;
   margin-bottom:150px;
   border-radius:5px;
+  width:200px;
  }
 .customCSS2{
-  width: 20%;
-  height:100%;
-  margin-left: 460px;
+  width: 30%;
+  height:350px;
+  margin-left:10px;
   border-radius:5px;
 }
 

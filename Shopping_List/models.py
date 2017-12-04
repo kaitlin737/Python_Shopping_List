@@ -3,7 +3,7 @@ from django.utils import timezone
 
 # Create your models here.
 class Grocery_list(models.Model):
-    title = models.CharField(max_length=140, default = "AAA")
+    title = models.CharField(max_length=140, default = "Enter Title")
     text=models.TextField(default = " ")
     created_date=models.DateTimeField(default=timezone.now)
     owner = models.ForeignKey('auth.User',null=True)

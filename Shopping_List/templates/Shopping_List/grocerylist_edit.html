@@ -8,17 +8,17 @@
       <form  method="POST" >
         {% load widget_tweaks %}
         {% csrf_token %}
-          <div class=""form-inline"">
-             <label>Name</label>
+          <div class="title-form">
+             <label class="form-inline-unique">Grocery List Name</label>
                {{form.title |add_class:"customCSS1" }}
           </div>
           <div class="form-group">
-             <label>Items</label>
+             <label  class="form-inline-unique2">Items</label>
 
-            {{form.text |add_class:"form-control customCSS2"}}
+            {{form.text |add_class:"customCSS2"}}
           </div>
-          <button type="submit" class="save btn btn-default">Save</button>
-  `     `</form>
+          <button type="submit" class="save btn btn-primary">Save</button>
+       </form>
   {{ form.media.js }}
     </div>
     </div>
