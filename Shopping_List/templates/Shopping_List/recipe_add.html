@@ -5,14 +5,13 @@
     <div class="jumbotron-custom">
     <div class="container">
       <h1>New Recipe</h1>
-      <form method = "POST" class = "post-form">
+      <form method = "POST">
         {% load widget_tweaks %}
         {% csrf_token %}
           <div class=""form-inline"">
             <label>Recipe Name</label>
-              {{ form.as_p }}
-            <label>Ingredients</label>
-              {{ sub_form.as_p }}
+              {{ form.recipe_name | add_class:"customCSS1" }}
+
           </div>
           <!--
           <div class="form-group">
@@ -22,7 +21,7 @@
           </div>
         -->
           <button type="submit" class="save btn btn-default">Save</button>
-  `     `</form>
+        </form>
   {{ form.media.js }}
     </div>
     </div>

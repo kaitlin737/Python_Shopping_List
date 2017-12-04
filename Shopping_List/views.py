@@ -4,14 +4,13 @@ from .models import Grocery_list
 from .models import Recipe
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
-#from .forms import GroceryForm
-#rom .forms import RecipeForm
+from .forms import GroceryForm
+from .forms import RecipeForm
 from django import forms
 from django.shortcuts import redirect
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
-from .forms import RecipeMultiForm
-from .forms import RecipeMultiForm
+#from .forms import RecipeMultiForm
 from .forms import IngredientForm
 
 # Create your views here.
@@ -108,123 +107,17 @@ def recipe_list(request):
         saved_recipe_list = Recipe.objects.all()
         return render(request, 'Shopping_List/recipe_list.html',{'saved_recipe_list':saved_recipe_list})
 
-class RecipeForm(forms.ModelForm):
-    class Meta:
-        model = Recipe
-        fields = ('recipe_name',)
-
 def recipe_bound_form(request, pk):
     recipelist = get_object_or_404(Recipe, pk=pk)
     return render(request,'Shopping_List/recipe_list.html', {'recipelist': recipelist})
 
 def add_recipe(request):
-    form = RecipeForm(prefix="rec")
-    sub_form = IngredientForm(prefix="ing")
     if request.method == "POST":
-        form = RecipeForm(request.POST, prefix="rec")
-        sub_form = IngredientForm(request.POST, prefix="ing")
-        if form.is_valid() and sub_form.is_valid:
-            Recipe = form.save(commit=False)
-            Recipe.ingredients = sub_form.save()
-            recipe.save()
-            return __goto__Recipe(Recipe)
-    else:
-        form=RecipeForm()
-    return render(request,'Shopping_List/recipe_add.html',{'form':form})
-
-"""
-def add_recipe(request):
-    #form_class = RecipeMultiForm
-    form = RecipeForm
-    if request.method == 'POST':
         form = RecipeForm(request.POST)
         if form.is_valid():
-            name = form.cleaned_data[recipe_name]
-            query = Recipe(recipe_name = recipe_name)
-            query.save()
+            Recipe = form.save(commit=False)
+            Recipe.save()
+            return redirect('recipe_add',pk=Recipe.pk)
     else:
-        form = RecipeForm()
-
-def grocery_new(request):
-    if request.method == "POST":
-        form=GroceryForm(request.POST)
-        if form.is_valid():
-            Grocery_list=form.save(commit=False)
-            Grocery_list.created_date=timezone.now()
-            Grocery_list.save()
-            return redirect('grocerylist_detail',pk=Grocery_list.pk)
-    else:
-        form=GroceryForm()
-    return render(request,'Shopping_List/grocerylist_edit.html',{'form':form})
-
-
-def recipe_add (request, recipe_id=None):
-    errors = []
-    if request.method == 'POST':
-        # handle data posted from the from
-        if not request.POST.get('recipe_name', ''):
-            errors.append('Enter Recipe Name.')
-        if not request.POST.get('ingredient_amt', ''):
-            errors.append('Enter Ingredient Amount')
-        if not request.POST.get('ingredient_meas', ''):
-            errors.append('Enter Ingredient Measure')
-        if not request.POST.get('ingredient_name', ''):
-            errors.append('Enter Ingredient Name')
-
-        if recipe_id:
-            recipe = recipe.objects.get(pk=recipe_id)
-        else:
-            recipe = Recipe()
-        recipe.recipe_name = request.POST.get('recipe_name')
-        final_ingredient == False
-        while final_ingredient == False:
-            recipe.ingredient_amt = request.POST.get('ingredient_amt')
-            recipe.ingredient_meas = request.POST.get('ingredient_meas')
-            recipe.ingredient_name = request.POST.get('ingredient_name')
-            z = input("Would you like to add another ingredient? Enter y or yes to continue.")
-            if (not z == "y" or z == "yes"):
-                final_ingredient == True
-                break
-        notes.notes = requiest.POST.get('Notes')
-        data = {
-            'errors': errors,
-            'recipe': recipe,
-            }
-        if errors:
-            data['heading'] = 'Add New Recipe'
-            data['content'] = 'Fill in the following information:'
-            return render(request, 'Python_Shopping_List/recipe_add.html', data)
-        else:
-            recipe.recipe_name = string(recipe.recipe_name)
-            recipe.ingredient_amt = float(recipe.ingredient_amt)
-            recipe.ingredient_meas = float(recipe.ingredient_meas)
-            recipe.ingredient_name = float(recipe.ingredient_name)
-            recipe.notes = string(recipe.notes)
-            recipe.save()
-
-            data['heading'] = 'Success'
-            data['content'] = 'Recipe added successfully!'
-            data['recipe'] = recipe
-
-            return render(request, 'Python_Shopping_List/recipe_add.html', data)
-    else:
-        if not recipe_id:
-            # must be a get method to enter new grade info so render the form for user to enter
-            # data
-            data = {
-                'heading': 'Add New Recipe',
-                'content': 'Fill in the following information',
-                'errors': errors,
-            }
-        else:
-            # edit existing student
-            #student = Student.objects.get(pk=student_id)
-            recipe = get_object_or_404(Recipe, pk=recipe_id)
-            data = {
-                'heading': 'Edit Recipe',
-                'content': 'Update the following information',
-                'errors': errors,
-                'recipe': recipe,
-            }
-            return render(request, 'Python_Shopping_List/recipe_add.html', data)
-"""
+            form = RecipeForm
+    return render(request,'Shopping_List/recipe_add.html',{'form':form})
