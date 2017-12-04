@@ -1,0 +1,30 @@
+{% extends 'Shopping_List/base.html' %}
+{% block content %}
+
+<body>
+    <div class="jumbotron-custom">
+    <div class="container">
+      <h1>New Recipe</h1>
+      <form method = "POST" class = "post-form">
+        {% load widget_tweaks %}
+        {% csrf_token %}
+          <div class=""form-inline"">
+            <label>Recipe Name</label>
+              {{ form.as_p }}
+            <label>Ingredients</label>
+              {{ sub_form.as_p }}
+          </div>
+          <!--
+          <div class="form-group">
+             <label>Items</label>
+
+            {{form.text |add_class:"form-control customCSS2"}}
+          </div>
+        -->
+          <button type="submit" class="save btn btn-default">Save</button>
+  `     `</form>
+  {{ form.media.js }}
+    </div>
+    </div>
+</body>
+{% endblock %}
