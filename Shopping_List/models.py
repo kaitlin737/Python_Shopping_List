@@ -6,7 +6,7 @@ class Grocery_list(models.Model):
     title = models.CharField(max_length=140, default = "Enter Title")
     text=models.TextField(default = " ")
     created_date=models.DateTimeField(default=timezone.now)
-    owner = models.ForeignKey('auth.User',null=True)
+    owner = models.ForeignKey('auth.User',null=True, on_delete=models.CASCADE)
     def publish(self):
         self.published_date=timezone.now()
         self.save()
@@ -49,7 +49,7 @@ class Recipe(models.Model):
     recipe_name = models.CharField(max_length = 50, default = "Enter Recipe Name")
     ingredients = models.TextField(default = "")
     notes = models.TextField(default = "")
-    owner = models.ForeignKey('auth.User',null=True)
+    owner = models.ForeignKey('auth.User',null=True, on_delete=models.CASCADE)
 
     def publish(self):
         self.save()
