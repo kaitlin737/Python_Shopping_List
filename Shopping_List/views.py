@@ -52,7 +52,7 @@ def grocerylist_detail(request,pk):
 
 def saved_grocery_lists(request):
     user = request.user
-    saved_lists = Grocery_list.objects.filter(owner=user)
+    saved_lists = Grocery_list.objects.all()
     #saved_lists = Grocery_list.objects.filter(created_date__lte=timezone.now()).order_by('created_date')
     return render(request, 'Shopping_List/saved_grocery_lists.html', {'saved_lists':saved_lists})
 
@@ -102,19 +102,19 @@ def signup(request):
     return render(request,'signup.html',{'form':form})
 
 def recipe_list(request):
-        saved_recipe_list = Recipe.objects.all()
-        return render(request, 'Shopping_List/recipe_list.html',{'saved_recipe_list':saved_recipe_list})
+    user=request.user
+    saved_recipe_list = Recipe.objects.all()
+    return render(request, 'Shopping_List/recipe_list.html',{'saved_recipe_list':saved_recipe_list})
 
 def recipe_bound_form(request, pk):
     recipelist = get_object_or_404(Recipe, pk=pk)
-    return render(request,'Shopping_List/recipe_list.html', {'recipelist': recipelist})
+    return render(request,'Shopping_List/recipe_add.html', {'recipelist': recipelist})
 
 def add_recipe(request):
-    if request.method == "POST":
+    if request.method == 'POST':
         form = RecipeForm(request.POST)
         if form.is_valid():
             Recipe = form.save(commit=False)
-            Recipe.owner = request.user
             Recipe.save()
             return redirect('recipe_detail',pk=Recipe.pk)
     else:
@@ -140,12 +140,12 @@ def recipe_detail(request,pk):
 
 def recipelist_edit(request,pk):
      recipelist = get_object_or_404(Recipe, pk=pk)
-     if request.method == "POST":
+     if request.method == 'POST':
          form = RecipeForm(request.POST, instance=recipelist)
          if form.is_valid():
              recipelist = form.save(commit=False)
              recipelist.save()
-             return redirect('recipe_edit', pk=recipelist.pk)
+             return redirect('recipe_detail', pk=recipelist.pk)
      else:
          form = RecipeForm(instance=recipelist)
      return render(request, 'Shopping_List/recipe_edit.html', {'form': form})
@@ -154,5 +154,5 @@ def recipe_delete(request, pk):
      recipelist = get_object_or_404(Recipe, pk=pk)
      if request.method == 'POST':
          recipelist.delete()
-         return redirect('saved_recipe_lists')
+         return redirect('recipe_list')
      return render(request,'Shopping_List/recipe_add.html', {'recipelist': recipelist})

@@ -26,6 +26,20 @@ color:black;
     align-items: center;
     display:block;
 }
+
+.recipe-custom{
+    background:url("http://italianmasterchef.com/wp-content/uploads/2013/02/Rustic-background.jpg") center center;/*slide.jpg =>you image*/
+    margin-top: -20px;/*removes white space at top*/
+    background-size: cover;
+    text-align: center;
+    min-height:100%;
+    min-height: 100vh; /* fills full page     */
+    display: flex;
+    align-items: center;
+    display:block;
+}
+
+
 .btn btn-default btn-lg btn-block{
   background-color: #4CAF50;
 font-size: 14;
@@ -40,6 +54,7 @@ font-size: 14;
   margin-left: 450px;
   margin-right:450px;
 }
+
 .title-form{
   margin-top: -20px;
 }
@@ -58,13 +73,15 @@ font-size: 14;
 .form-inline-unique3{
   font-size: 14pt;
   display:block;
-  margin-right:50px;
-  margin-top:50px;
+  margin-left:-350px;
+  margin-top:-110px;
 }
 .form-inline-unique4{
   font-size: 14pt;
   display:block;
-  margin-top:-60px;
+  margin-left:840px;
+  margin-top:-55px;
+  float:left;
 }
 .customCSS1{
   margin-top:50px;
@@ -82,13 +99,13 @@ font-size: 14;
 .customCSS3{
   width: 30%;
   height:350px;
-  margin-left:50px;
+  margin-left:90px;
   border-radius:5px;
 }
 .customCSS4{
-  margin-top:-200px;
+  margin-top:-225px;
   width: 30%;
-  height:250px;
+  height:350px;
   margin-left:700px;
   border-radius:5px;
 }

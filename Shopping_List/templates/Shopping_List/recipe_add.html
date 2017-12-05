@@ -2,16 +2,21 @@ extends 'Shopping_List/base.html' %}
 
 {% block content %}
 
- <div>
-       <h1 class="details">{{ Recipe.recipe_name }}</h1>
-       <div class="jumbotron-2">
-       <p class="listing">{{ Recipe.ingredients|linebreaksbr }}</p>
-     </div>
-     <div class="jumbotron-2">
-     <p class="listing">{{ recipelist.notes|linebreaksbr }}</p>
-   </div>
-   </div>
-   <!-- <a class="btn btn-primary" style="margin-left:450px;" href="{% url 'edit_list' pk=grocerylist.pk %}"><span> Edit List</span></a>
-   <a class="btn btn-danger" href="{% url 'grocery_delete' grocerylist.pk %}"><span> Delete List</span></a>
-   <a class="btn btn-primary" style="margin-left:288px; width:175px;" href="http://127.0.0.1:8000/Shopping_List/saved_lists/"><span> All Saved Lists</span></a> -->
+<body>
+  <div class="recipe-custom">
+  <div class="container">
+      <h1 class="details">{{ recipelist.recipe_name }}</h1>
+      <div class="recipe-custom">
+      <p class="listing">{{ recipelist.ingredients|linebreaksbr }}</p>
+      </div>
+      <div class="recipe-custom">
+      <p class="listing">{{ recipelist.notes|linebreaksbr }}</p>
+      </div>
+ {{ form.media.js }}
+  </div>
+  </div>
+   <!-- <a class="btn btn-primary" style="margin-left:450px;" href="{% url 'edit_recipe' pk=recipelist.pk %}"><span> Edit Recipe</span></a>
+   <a class="btn btn-danger" href="{% url 'recipe_delete' pk=recipelist.pk %}"><span> Delete Recipe</span></a>
+   <a class="btn btn-primary" style="margin-left:288px; width:175px;" href="http://127.0.0.1:8000/Shopping_List/saved_recipe_list/"><span> List of Recipes</span></a> -->
+</body>
 {% endblock %}}
