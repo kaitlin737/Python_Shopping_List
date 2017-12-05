@@ -10,8 +10,6 @@ from django import forms
 from django.shortcuts import redirect
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
-#from .forms import RecipeMultiForm
-from .forms import IngredientForm
 
 # Create your views here.
 def Home(request):
@@ -116,11 +114,12 @@ def add_recipe(request):
         form = RecipeForm(request.POST)
         if form.is_valid():
             Recipe = form.save(commit=False)
+            Recipe.owner = request.user
             Recipe.save()
-            return redirect('recipe_add',pk=Recipe.pk)
+            return redirect('recipe_detail',pk=Recipe.pk)
     else:
-        form = RecipeForm
-    return render(request,'Shopping_List/recipe_add.html',{'form':form})
+        form = RecipeForm()
+    return render(request,'Shopping_List/recipe_edit.html',{'form':form})
 
 def edit_recipe(request,pk):
     recipelist=get_object_or_404(Recipe,pk=pk)
@@ -129,7 +128,7 @@ def edit_recipe(request,pk):
         if form.is_valid():
             recipelist = form.save(commit=False)
             recipelist.save()
-            return redirect('recipe_add',pk=recipelist.pk)
+            return redirect('recipe_detail',pk=recipelist.pk)
     else:
         form = RecipeForm(instance=recipelist)
     return render(request,"Shopping_List/recipe_edit.html", {'form':form,'pk':recipelist})

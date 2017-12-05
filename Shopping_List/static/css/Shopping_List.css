@@ -3,7 +3,9 @@ margin-top: 20px;
 margin-left: 150px;
 padding: 0px;
 width:80%;
-text-align: center
+text-align: center;
+background-color:#e6e6ff;
+color:black;
 }
 .thumbnail img {
    height:250px;
@@ -23,6 +25,10 @@ text-align: center
     display: flex;
     align-items: center;
     display:block;
+}
+.btn btn-default btn-lg btn-block{
+  background-color: #4CAF50;
+font-size: 14;
 }
 .btn btn-danger{
   margin-left:450px;
@@ -48,6 +54,18 @@ text-align: center
   display:block;
   margin-top:-60px;
 }
+
+.form-inline-unique3{
+  font-size: 14pt;
+  display:block;
+  margin-right:50px;
+  margin-top:50px;
+}
+.form-inline-unique4{
+  font-size: 14pt;
+  display:block;
+  margin-top:-60px;
+}
 .customCSS1{
   margin-top:50px;
   margin-bottom:150px;
@@ -58,6 +76,20 @@ text-align: center
   width: 30%;
   height:350px;
   margin-left:10px;
+  border-radius:5px;
+}
+
+.customCSS3{
+  width: 30%;
+  height:350px;
+  margin-left:50px;
+  border-radius:5px;
+}
+.customCSS4{
+  margin-top:-200px;
+  width: 30%;
+  height:250px;
+  margin-left:700px;
   border-radius:5px;
 }
 
