@@ -90,7 +90,7 @@ def bound_form(request, pk):
     meat=[]
     canned=[]
 
-    deptDict ={'milk':dairy, 'cheese':dairy,'sour cream':dairy, 'bread':baked,'steak':meat,'peanutbutter':canned}
+    deptDict ={'milk':dairy, 'cheese':dairy,'sourcream':dairy, 'bread':baked,'steak':meat,'peanutbutter':canned}
     grocerylist = get_object_or_404(Grocery_list, pk=pk)
 
     items = grocerylist.text.split()
@@ -99,7 +99,7 @@ def bound_form(request, pk):
 
 
 
-    return render(request,'Shopping_List/grocerylist_detail.html', {'grocerylist': grocerylist,  'dairy':dairy})
+    return render(request,'Shopping_List/grocerylist_detail.html', {'grocerylist': grocerylist,  'dairy':dairy, 'meat': meat})
 
 def signup(request):
     if request.method == 'POST':
