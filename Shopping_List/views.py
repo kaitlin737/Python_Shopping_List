@@ -48,7 +48,6 @@ def grocerylist_detail(request,pk):
      #text = get_object_or_404(Grocery_list, pk=pk)
      #Grocery_list.title=Grocery_list.objects.get(pk=pk)
      Grocery_list=get_object_or_404(Grocery_list,pk=pk)
-     Hi = "hey"
      return render(request, 'Shopping_List/grocerylist_detail.html',{'Grocery_list':Grocery_list})
 
 def saved_grocery_lists(request):
