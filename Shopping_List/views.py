@@ -10,11 +10,13 @@ from django import forms
 from django.shortcuts import redirect
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def Home(request):
     return render(request, 'Shopping_List/Home.html')
 
+@login_required
 def grocery_new(request):
     if request.method == "POST":
         form=GroceryForm(request.POST)
@@ -50,9 +52,10 @@ def grocerylist_detail(request,pk):
      Grocery_list=get_object_or_404(Grocery_list,pk=pk)
      return render(request, 'Shopping_List/grocerylist_detail.html',{'Grocery_list':Grocery_list})
 
+@login_required
 def saved_grocery_lists(request):
     user = request.user
-    saved_lists = Grocery_list.objects.all()
+    saved_lists = Grocery_list.objects.filter(user)
     #saved_lists = Grocery_list.objects.filter(created_date__lte=timezone.now()).order_by('created_date')
     return render(request, 'Shopping_List/saved_grocery_lists.html', {'saved_lists':saved_lists})
 
@@ -101,15 +104,17 @@ def signup(request):
         form=UserCreationForm()
     return render(request,'signup.html',{'form':form})
 
+@login_required
 def recipe_list(request):
     user=request.user
-    saved_recipe_list = Recipe.objects.all()
+    saved_recipe_list = Recipe.objects.filter(user)
     return render(request, 'Shopping_List/recipe_list.html',{'saved_recipe_list':saved_recipe_list})
 
 def recipe_bound_form(request, pk):
     recipelist = get_object_or_404(Recipe, pk=pk)
     return render(request,'Shopping_List/recipe_add.html', {'recipelist': recipelist})
 
+@login_required
 def add_recipe(request):
     if request.method == 'POST':
         form = RecipeForm(request.POST)
