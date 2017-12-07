@@ -101,7 +101,7 @@ def signup(request):
         form=UserCreationForm()
     return render(request,'signup.html',{'form':form})
 
-def recipe_list(request):
+def recipe_list(request,):
     user=request.user
     saved_recipe_list = Recipe.objects.all()
     return render(request, 'Shopping_List/recipe_list.html',{'saved_recipe_list':saved_recipe_list})
