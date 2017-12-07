@@ -84,8 +84,22 @@ class GroceryListForm(forms.ModelForm):
         model = Grocery_list
         fields = ("title","text" )
 def bound_form(request, pk):
+    dairy=[]
+    baked=[]
+    fruitVeg=[]
+    meat=[]
+    canned=[]
+
+    deptDict ={'milk':dairy, 'cheese':dairy,'sourcream':dairy, 'bread':baked,'steak':meat,'peanutbutter':canned}
     grocerylist = get_object_or_404(Grocery_list, pk=pk)
-    return render(request,'Shopping_List/grocerylist_detail.html', {'grocerylist': grocerylist})
+
+    items = grocerylist.text.split()
+    for item in items:
+        deptDict[item.lower()].append(item)
+
+
+
+    return render(request,'Shopping_List/grocerylist_detail.html', {'grocerylist': grocerylist,  'dairy':dairy, 'meat': meat})
 
 def signup(request):
     if request.method == 'POST':
