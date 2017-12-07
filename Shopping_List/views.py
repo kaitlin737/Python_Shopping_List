@@ -130,7 +130,6 @@ def edit_recipe(request,pk):
             recipelist.save()
             return redirect('recipe_detail',pk=recipelist.pk)
     else:
-<<<<<<< HEAD
         form = RecipeForm(instance=recipelist)
     return render(request,"Shopping_List/recipe_edit.html", {'form':form,'pk':recipelist})
 
@@ -157,7 +156,3 @@ def recipe_delete(request, pk):
          recipelist.delete()
          return redirect('recipe_list')
      return render(request,'Shopping_List/recipe_add.html', {'recipelist': recipelist})
-=======
-            form = RecipeForm()
-    return render(request,'Shopping_List/recipe_add.html',{'form':form})
->>>>>>> 948f35009e6322ad120557ccb33d16742a1207d5
