@@ -10,6 +10,7 @@ from django import forms
 from django.shortcuts import redirect
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
+# from django.views.generic.list import ListView
 
 # Create your views here.
 def Home(request):
@@ -21,7 +22,7 @@ def grocery_new(request):
         if form.is_valid():
             Grocery_list=form.save(commit=False)
             Grocery_list.created_date=timezone.now()
-            Grocery_list.owner = request.user
+            # Grocery_list.owner = request.user
             Grocery_list.save()
             return redirect('grocerylist_detail',pk=Grocery_list.pk)
     else:
@@ -83,23 +84,11 @@ class GroceryListForm(forms.ModelForm):
     class Meta:
         model = Grocery_list
         fields = ("title","text" )
+
 def bound_form(request, pk):
-    dairy=[]
-    baked=[]
-    fruitVeg=[]
-    meat=[]
-    canned=[]
-
-    deptDict ={'milk':dairy, 'cheese':dairy,'sourcream':dairy, 'bread':baked,'steak':meat,'peanutbutter':canned}
     grocerylist = get_object_or_404(Grocery_list, pk=pk)
+    return render(request,'Shopping_List/grocerylist_detail.html', {'grocerylist': grocerylist})
 
-    items = grocerylist.text.split()
-    for item in items:
-        deptDict[item.lower()].append(item)
-
-
-
-    return render(request,'Shopping_List/grocerylist_detail.html', {'grocerylist': grocerylist,  'dairy':dairy, 'meat': meat})
 
 def signup(request):
     if request.method == 'POST':
@@ -116,9 +105,15 @@ def signup(request):
     return render(request,'signup.html',{'form':form})
 
 def recipe_list(request,):
-    user=request.user
+    # user=request.user
     saved_recipe_list = Recipe.objects.all()
     return render(request, 'Shopping_List/recipe_list.html',{'saved_recipe_list':saved_recipe_list})
+
+# class RecipeList(generic.ListView):
+#     model = Recipe
+#     context_object_name = 'saved_recipe_list'
+#     queryset = Books.object.filter()
+#     template_name = 'Shopping_List/recipe_list.html'
 
 def recipe_bound_form(request, pk):
     recipelist = get_object_or_404(Recipe, pk=pk)
@@ -169,4 +164,4 @@ def recipe_delete(request, pk):
      if request.method == 'POST':
          recipelist.delete()
          return redirect('recipe_list')
-     return render(request,'Shopping_List/recipe_add.html', {'recipelist': recipelist})
+     return render(request,'Shopping_List/recipe/recipe_add.html', {'recipelist': recipelist})

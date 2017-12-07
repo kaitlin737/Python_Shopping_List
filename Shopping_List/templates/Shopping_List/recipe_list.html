@@ -1,15 +1,15 @@
 {% extends 'Shopping_List/base.html' %}
 
 {% block content %}
+<div class = "recipe-custom">
 <a href="http://127.0.0.1:8000/Shopping_List/newrecipe/"><button type="button" class="btn btn-default btn-lg btn-block"><b>Add Recipe</b></button>
-    {% for Recipe in saved_recipe_list %}
-<div class="recipe-custom">
-  <div class="listing">
-  <!-- <div class="container"> -->
+  {% for Recipe in saved_recipe_list %}
+    <!-- <div class="recipe-custom"> -->
+    <div class="container">
 
-    <h1><a href="{% url 'recipe_detail' pk=Recipe.pk %}">{{ Recipe.recipe_name }}</h1><br></a>
+    <h3><a href="{% url 'recipe_detail' pk=Recipe.pk %}">{{ Recipe.recipe_name }}<br></a></h3>
 
-  </div>
+    </div>
+  {% endfor %}
 </div>
-    {% endfor %}
 {% endblock %}

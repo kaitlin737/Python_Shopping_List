@@ -1,22 +1,25 @@
 {%extends 'Shopping_List/base.html' %}
 
 {% block content %}
-
-<body>
-  <div class="recipe-custom">
-  <div class="container">
-      <h1 class="details">{{ recipelist.recipe_name }}</h1>
-      <div class="recipe-custom">
+<div class="recipe-custom">
+<div class="new-back"
+  <!-- <div class="recipe-custom"> -->
+      <h3 class="details">{{ recipelist.recipe_name }}</h3>
+      <!-- <div class="recipe-custom"> -->
       <p class="listing">{{ recipelist.ingredients|linebreaksbr }}</p>
-      </div>
-      <div class="recipe-custom">
+      <!-- </div> -->
+      <!-- <div class="recipe-custom"> -->
       <p class="listing">{{ recipelist.notes|linebreaksbr }}</p>
-      </div>
+      <!-- </div> -->
  {{ form.media.js }}
-  </div>
-  </div>
-   <!-- <a class="btn btn-primary" style="margin-left:450px;" href="{% url 'edit_recipe' pk=recipelist.pk %}"><span> Edit Recipe</span></a>
+  <!-- </div> -->
+  <a class="btn btn-primary" style="margin-left:450px;" href="{% url 'edit_recipe' pk=recipelist.pk %}"><span> Edit Recipe</span></a>
 
-   <a class="btn btn-primary" style="margin-left:288px; width:175px;" href="http://127.0.0.1:8000/Shopping_List/saved_recipe_list/"><span> List of Recipes</span></a> -->
-</body>
+  <a class="btn btn-primary" style="margin-left:288px; width:175px;" href="http://127.0.0.1:8000/Shopping_List/saved_recipe_list/"><span> Saved Recipe List</span></a>
+</div>
+
+</div>
+ <!-- <a class="btn btn-primary" style="margin-left:450px;" href="{% url 'edit_recipe' pk=recipelist.pk %}"><span> Edit Recipe</span></a> -->
+
+ <!-- <a class="btn btn-primary" style="margin-left:288px; width:175px;" href="http://127.0.0.1:8000/Shopping_List/saved_recipe_list/"><span> Saved Recipe List</span></a> -->
 {% endblock %}}
