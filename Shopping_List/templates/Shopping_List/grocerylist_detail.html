@@ -2,7 +2,7 @@
 
 {% block content %}
 
-  <div>
+  <div class="new-back">
         {% if grocerylist.created_date %}
             <div class="listing">
                 {{ grocerylist.created_date }}
@@ -15,5 +15,51 @@
     </div>
     <a class="btn btn-primary" style="margin-left:450px;" href="{% url 'edit_list' pk=grocerylist.pk %}"><span> Edit List</span></a>
     <a class="btn btn-danger" href="{% url 'grocery_delete' grocerylist.pk %}"><span> Delete List</span></a>
+
     <a class="btn btn-primary" style="margin-left:288px; width:175px;" href="http://127.0.0.1:8000/Shopping_List/saved_lists/"><span> All Saved Lists</span></a>
+
+    <div style="float:right; width:20%">
+    <h3>Dairy Section</h3>
+    <div style="border:solid;">
+    {% for item in dairy %}
+      {{ item }}</br>
+    {% endfor %}
+  </div>
+</div>
+
+  <div style="float:right; width:20%">
+  <h3>Meats Section</h3>
+  <div style="border:solid; ">
+  {% for item in meat %}
+    {{ item }}</br>
+  {% endfor %}
+</div>
+</div>
+
+<div style="float:right; width:20%">
+<h3>Meats Section</h3>
+<div style="border:solid; ">
+{% for item in meat %}
+  {{ item }}</br>
+{% endfor %}
+</div>
+</div>
+
+<div style="float:right; width:20%">
+<h3>Meats Section</h3>
+<div style="border:solid; ">
+{% for item in meat %}
+  {{ item }}</br>
+{% endfor %}
+</div>
+</div>
+
+<div style="float:right; width:20%">
+<h3>Meats Section</h3>
+<div style="border:solid; ">
+{% for item in meat %}
+  {{ item }}</br>
+{% endfor %}
+</div>
+</div>
 {% endblock %}}
